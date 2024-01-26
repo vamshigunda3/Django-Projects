@@ -1,0 +1,24 @@
+.header-row {
+    display: flex;
+    justify-content: center;
+    /* Center the image horizontally */
+    align-items: center;
+    /* Center the image vertically */
+    height: 100px;
+    /* Adjust as needed */
+    margin-bottom: 20px;
+    table-layout: fixed;
+    /* For xhtml2pdf compatibility */
+}
+
+.header-row img {
+    width: 80%;
+    /* Adjust as needed */
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
+table {
+    border: 1px solid black;
+    /* Default: 1px solid black */
+}

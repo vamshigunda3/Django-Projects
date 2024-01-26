@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+
+{% block content %}
+
+<head>
+    <title>Payment Preview | Company Name</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-preview {
+            margin-bottom: 20px;
+        }
+
+        .payment-details {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .payment-details th,
+        .payment-details td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .payment-details th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .primary-button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .primary-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <h1>Payment Preview</h1>
+    </header>
+
+    <main>
+        <section class="payment-preview">
+            <h2>Review Your Information</h2>
+            <p>Please ensure the following details are correct before confirming your payment.</p>
+            <table class="payment-details">
+                <thead>
+                    <tr>
+                        <th>Fields</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>First Name</td>
+                        <td>{{ payment_data.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>{{ payment_data.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Amount</td>
+                        <td>{{ payment_data.amount }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <form id="paymentForm" method="POST" action="{% url 'stripe_payment:handle_payment_request' %}">
+            {% csrf_token %}
+            <input type="hidden" name="payment_id" value="{{ payment_data.phone_number }}">
+            <button type="submit" class="primary-button">Confirm Payment</button>
+        </form>
+    </main>
+
+    <footer>
+    </footer>
+</body>
+
+</html>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+<head>
+    <title>Payment Preview</title>
+</head>
+
+<body>
+    <h1>Payment Preview</h1>
+    <p>Please review your information:</p>
+    <ul>
+        <li>First Name: {{ payment_data.first_name }}</li>
+        <li>Last Name: {{ payment_data.last_name }}</li>
+        <li>Amount: {{ payment_data.amount }}</li>
+    </ul>
+    <form id="paymentForm" method="POST" action="{% url 'stripe_payment:handle_payment_request' %}">
+        {% csrf_token %}
+        <input type="hidden" name="payment_id" value="{{ payment_data.phone_number }}">
+        <button type="button" onclick="submitForm()">Confirm Payment</button>
+    </form>
+    <script>
+        function submitForm() {
+            var form = document.getElementById("paymentForm");
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>
+ -->

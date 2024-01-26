@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <title>User Information PDF</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <style>
+        /* Basic styling for PDF formatting */
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<header class="header-row">
+    <img src="{% static 'images/Header_Image.jpg' %}" alt="Header Image" class="img-fluid">
+</header>
+<main>
+    <h1>User Information</h1>
+    <table>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                {% for key, value in row.items %}
+                <th>{{key}}</th>
+                <td>{{ value }}</td>
+
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</main>
+
+</html>

@@ -1,0 +1,28 @@
+<!-- {% if preview_data %} -->
+<!DOCTYPE html>
+<html lang="en">
+<h2>Summary</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Form Name</th>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for form_name, step_data in preview_data.items %}
+        {% for field, value in step_data.items %}
+        <tr>
+            <td>{{ form_name }}</td>
+            <td>{{ field }}</td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+<input type="submit" class="btn btn-primary btn-block mt-3" value="Submit">
+<!-- {% endif %} -->
+
+</html>

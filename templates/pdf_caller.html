@@ -1,0 +1,4 @@
+<form action="{% url 'pdf_caller' %}" method="POST" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary btn-block">Register</button>
+</form>

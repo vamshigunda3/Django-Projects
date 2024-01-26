@@ -1,0 +1,66 @@
+<!-- Your HTML structure and head content -->
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+{% load crispy_forms_tags %}
+<!-- Your HTML structure and head content -->
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+                <h1 class="mt-5 mb-4 text-center">Applicant Registration</h1>
+
+                <form action="{% url 'app_form:msf_1' %}" method="post" class="form-group"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table class="table table-bordered">
+                        {{ wizard.management_form }}
+                        {% if wizard.form.forms %}
+                        {{ wizard.form.management_form }}
+                        {% for form in wizard.form.forms %}
+                        {{ form|crispy }}
+                        {{wizard.steps.current}}
+                        {% endfor %}
+                        {% else %}
+                        {{ wizard.form }}
+                        {% endif %}
+                    </table>
+
+                    <div class="text-center mt-3">
+                        {% if wizard.steps.current == 0 %}
+                        <button class="btn btn-primary">Next</button>
+                        {% elif wizard.steps.current < wizard.steps.last %} <button class="btn btn-primary">
+                            Previous</button>
+                            <button class="btn btn-primary">Next</button>
+                            {% if wizard.steps.current > 1 %}
+                            <button class="btn btn-primary">First Step</button>
+                            {% endif %}
+                            {% else %}
+                            <button class="btn btn-primary">Previous</button>
+                            <button class="btn btn-primary">Preview</button>
+                            {% endif %}
+                    </div>
+
+                </form>
+                {% if wizard.steps.current == wizard.steps.last and all_forms_valid %}
+                <h2>Summary</h2>
+                <table class="table table-bordered">
+                    {% for step_name, step_data in preview_data.items %}
+                    {% endfor %}
+                </table>
+                <input type="submit" class="btn btn-primary btn-block mt-3" value="Submit">
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock content %}
+
+
+</html>
+
+<!-- onclick="document.getElementById('preview-button').click()" -->

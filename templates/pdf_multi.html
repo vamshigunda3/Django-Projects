@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <title>User Information PDF</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+    <header class="header-row">
+        <img src="{% static 'images/Header_Image.jpg' %}" alt="Header Image" class="img-fluid">
+    </header>
+
+    <main>
+        <h1>User Information</h1>
+        <table style="table-layout: fixed;">
+            <tbody>
+                {% for field, value in data.items %}
+                <tr>
+                    <th>{{ field }}</th>
+                    <td>{{ value }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">No user information available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+
+</body>
+
+</html>
